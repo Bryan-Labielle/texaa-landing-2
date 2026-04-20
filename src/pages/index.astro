@@ -1,0 +1,1104 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+// Hero (LCP)
+import heroCinematic from '../assets/hero/hero-cinematic.jpg';
+
+// Génère les variantes WebP et récupère les attributs srcset/sizes pour le preload
+const heroPreload = await getImage({
+	src: heroCinematic,
+	width: 1920,
+	height: 1536,
+	widths: [768, 1280, 1920],
+	format: 'webp',
+	quality: 72,
+});
+
+// References
+import refChocolaterieEthiquable from '../assets/references/chocolaterie-ethiquable.jpg';
+import refBouillonBaratte from '../assets/references/restaurant-bouillon-baratte.jpg';
+import refDeusExMachina from '../assets/references/restaurant-deus-ex-machina.jpg';
+
+// Réalisation (Why Texaa image)
+import realisationOrange from '../assets/references/siege-regional-orange.jpg';
+
+// Impact
+import avantApres from '../assets/impact/avant-apres.png';
+
+// Products
+import productVibrasto from '../assets/products/vibrasto.png';
+import productStereo from '../assets/products/stereo.png';
+import productStereoAir from '../assets/products/stereo-air.png';
+import productStrato from '../assets/products/strato.png';
+import productAbso from '../assets/products/abso.png';
+
+// Heritage
+import heritageAtelier from '../assets/heritage/atelier-texaa.jpg';
+import logoEpv from '../assets/heritage/logo-epv.png';
+import logoFabriqueFrance from '../assets/heritage/logo-fabrique-france.png';
+
+// Logos clients
+import logoHermes from '../assets/logos/hermes.png';
+import logoSyctom from '../assets/logos/syctom.png';
+import logoRatp from '../assets/logos/ratp.png';
+import logoSncf from '../assets/logos/sncf.svg';
+import logoNovotel from '../assets/logos/novotel.png';
+import logoLdlc from '../assets/logos/ldlc.webp';
+import logoLedger from '../assets/logos/ledger.png';
+import logoRepubliqueFrancaise from '../assets/logos/republique-francaise.png';
+
+const phoneNumber = "05 56 75 71 56";
+const phoneLink = "tel:+33556757156";
+
+const references = [
+	{
+		title: "Chocolaterie Ethiquable",
+		project: "Chocolaterie Ethiquable",
+		year: "2021",
+		location: "Fleurance, France",
+		client: "Ethiquable",
+		photographer: "Arnaud Brossard",
+		image: refChocolaterieEthiquable
+	},
+	{
+		title: "Restaurant Bouillon Baratte",
+		project: "Restaurant Bouillon Baratte",
+		year: "2019",
+		location: "Lyon, France",
+		architect: "Designer Pascal Claude Drach",
+		photographer: "Erick Saillet Studio",
+		image: refBouillonBaratte
+	},
+	{
+		title: "Restaurant Deus Ex Machina",
+		project: "Restaurant Deus Ex Machina",
+		year: "2018",
+		location: "Biarritz, France",
+		client: "Restaurant Deus Ex Machina Benjamin Marigot Manager France",
+		image: refDeusExMachina
+	}
+];
+
+const whyTexaaFeatures = [
+	{
+		number: "01",
+		title: "Expertise textile & acoustique",
+		description: "Nos produits combinent performance acoustique mesurée et qualité textile haut de gamme. La matière est au cœur de notre savoir-faire, pas un simple habillage."
+	},
+	{
+		number: "02",
+		title: "Gamme complète, cohérente",
+		description: "Plafonds, murs, suspensions, mobilier — une gamme conçue pour répondre à chaque configuration, avec cohérence esthétique et technique entre les produits."
+	},
+	{
+		number: "03",
+		title: "Production en France",
+		description: "Fabrication à Bordeaux. Délais maîtrisés, traçabilité assurée, flexibilité sur les commandes spécifiques et les teintes hors catalogue."
+	}
+];
+
+const trustedLogos = [
+	{ name: "Hermès", logo: logoHermes },
+	{ name: "Syctom", logo: logoSyctom },
+	{ name: "RATP", logo: logoRatp },
+	{ name: "SNCF", logo: logoSncf },
+	{ name: "Novotel", logo: logoNovotel },
+	{ name: "LDLC Arena", logo: logoLdlc },
+	{ name: "Ledger", logo: logoLedger },
+	{ name: "La République Française", logo: logoRepubliqueFrancaise }
+];
+
+
+
+const faqs = [
+	{
+		question: "Vos solutions sont-elles adaptées aux ERP et aux contraintes réglementaires ?",
+		answer: "Oui, nos produits sont conçus pour répondre aux exigences des établissements recevant du public (ERP). Nous fournissons les fiches techniques et procès-verbaux nécessaires (réaction au feu, données acoustiques) pour la conformité de votre projet. N'hésitez pas à nous consulter pour vérifier l'adéquation de nos solutions avec vos contraintes spécifiques."
+	},
+	{
+		question: "Proposez-vous des solutions sur-mesure (dimensions, coloris) ?",
+		answer: "Oui, nous proposons une large palette de coloris et pouvons adapter les dimensions de nos produits à votre projet. Notre production française nous permet de répondre aux demandes spécifiques. Contactez nos équipes pour discuter de vos besoins particuliers et obtenir des échantillons dans les coloris souhaités."
+	},
+	{
+		question: "Comment se déroule l'accompagnement projet avec Texaa ?",
+		answer: "Notre accompagnement comprend : l'analyse de votre problématique acoustique, la préconisation de solutions adaptées, l'aide au dimensionnement et au positionnement des produits, la fourniture de la documentation technique pour vos dossiers, et le suivi jusqu'à la livraison. Nous travaillons régulièrement avec les architectes, bureaux d'études et maîtres d'ouvrage à toutes les phases du projet."
+	},
+	{
+		question: "Est-ce que l'installation nécessite de fermer mon établissement ?",
+		answer: "Non, la plupart de nos solutions se posent rapidement sans poussière ni nuisances majeures."
+	},
+];
+
+---
+
+<Layout
+	preloadHref={heroPreload.src}
+	preloadImagesrcset={heroPreload.srcSet?.attribute}
+	preloadImagesizes="100vw"
+>
+	<!-- Sticky Header (Desktop) -->
+	<header class="sticky-header" id="stickyHeader">
+		<div class="sticky-header-inner">
+			<a href="/" class="sticky-logo" aria-label="Texaa — Accueil">
+				<svg width="144" height="35" viewBox="0 0 144 35" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<path d="M9.984 34H16.704V5.776H26.304V0.495999H0.384V5.776H9.984V34ZM29.2001 19.216C29.4881 15.904 31.3121 13.408 34.9121 13.408C38.5121 13.408 39.9521 16.096 40.1441 19.216H29.2001ZM44.4641 27.376C42.0641 28.72 39.3761 29.872 36.2561 29.872C32.2721 29.872 29.4881 27.616 29.2001 23.632H46.2881C46.2881 14.992 43.6961 8.704 34.5281 8.704C26.8481 8.704 23.0561 14.608 23.0561 21.76C23.0561 29.872 27.8081 34.576 35.9681 34.576C39.4241 34.576 42.1121 33.904 44.4641 32.608V27.376ZM56.928 21.04L48.432 34H55.488L61.056 24.784L66.576 34H74.256L65.904 21.04L73.296 9.28H66.48L61.728 17.344L56.88 9.28H49.296L56.928 21.04ZM79.2799 16.096C81.4399 14.464 84.1759 13.408 86.9119 13.408C90.7039 13.408 92.4799 14.752 92.4799 18.736H88.9279C86.2399 18.736 83.0719 18.976 80.6239 20.176C78.1759 21.376 76.3999 23.536 76.3999 27.232C76.3999 31.936 80.6719 34.576 85.0399 34.576C87.9679 34.576 91.1839 33.04 92.6719 30.304H92.7679C92.8159 31.072 92.8159 32.704 93.0559 34H98.7199C98.5759 32.08 98.4799 30.352 98.4319 28.48C98.3839 26.656 98.3359 24.784 98.3359 22.288V19.12C98.3359 11.824 95.2159 8.704 87.6799 8.704C84.9439 8.704 81.5839 9.424 79.0879 10.576L79.2799 16.096ZM82.5439 26.848C82.5439 23.056 86.8159 22.576 89.6959 22.576H92.4799C92.4799 24.496 92.1919 26.272 91.1359 27.664C90.1279 29.008 88.5919 29.872 86.6239 29.872C84.3199 29.872 82.5439 28.96 82.5439 26.848ZM105.952 16.096C108.112 14.464 110.848 13.408 113.584 13.408C117.376 13.408 119.152 14.752 119.152 18.736H115.6C112.912 18.736 109.744 18.976 107.296 20.176C104.848 21.376 103.072 23.536 103.072 27.232C103.072 31.936 107.344 34.576 111.712 34.576C114.64 34.576 117.856 33.04 119.344 30.304H119.44C119.488 31.072 119.488 32.704 119.728 34H125.392C125.248 32.08 125.152 30.352 125.104 28.48C125.056 26.656 125.008 24.784 125.008 22.288V19.12C125.008 11.824 121.888 8.704 114.352 8.704C111.616 8.704 108.256 9.424 105.76 10.576L105.952 16.096ZM109.216 26.848C109.216 23.056 113.488 22.576 116.368 22.576H119.152C119.152 24.496 118.864 26.272 117.808 27.664C116.8 29.008 115.264 29.872 113.296 29.872C110.992 29.872 109.216 28.96 109.216 26.848Z" fill="currentColor"/>
+					<path d="M127.858 8.322C127.858 12.7 131.422 16.264 135.8 16.264C140.178 16.264 143.742 12.7 143.742 8.322C143.742 3.944 140.178 0.379999 135.8 0.379999C131.422 0.379999 127.858 3.944 127.858 8.322ZM130.146 8.322C130.146 4.67 132.61 2.14 135.8 2.14C138.946 2.14 141.454 4.67 141.454 8.322C141.454 11.996 138.946 14.504 135.8 14.504C132.61 14.504 130.146 11.996 130.146 8.322ZM132.61 12.7H134.502V8.96H135.404L137.516 12.7H139.452L137.12 8.872C138.484 8.762 139.452 8.124 139.452 6.518C139.452 4.538 138.176 3.878 135.932 3.878H132.61V12.7ZM134.502 7.508V5.33H135.844C136.592 5.33 137.56 5.44 137.56 6.342C137.56 7.354 136.944 7.508 136.042 7.508H134.502Z" fill="currentColor"/>
+				</svg>
+			</a>
+			<nav class="sticky-cta" aria-label="Actions principales">
+				<a href={phoneLink} class="sticky-phone">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+					</svg>
+					{phoneNumber}
+				</a>
+				<a href="#contact-form" class="btn btn-primary btn-sm">Demander un devis</a>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Mobile Sticky CTA -->
+	<div class="mobile-sticky-cta">
+		<a href={phoneLink}>
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+			</svg>
+			Appeler un expert
+		</a>
+	</div>
+
+	<!-- HERO SECTION — Cinématique : photo plein écran, contenu bas avec barre de stats -->
+	<section class="hero hero-cinematic">
+		<div class="hero-image">
+			<Image
+				src={heroCinematic}
+				alt="Espace architectural traité acoustiquement par Texaa"
+				width={1920}
+				height={1536}
+				widths={[768, 1280, 1920]}
+				sizes="100vw"
+				format="webp"
+				quality={72}
+				loading="eager"
+				fetchpriority="high"
+			/>
+			<div class="hero-cinematic-overlay"></div>
+		</div>
+		<div class="container">
+			<div class="hero-cinematic-content">
+				<div class="hero-cinematic-top">
+					<div class="hero-label">
+						<span></span>
+						Fabricant français depuis 1979
+					</div>
+
+					<h1>Réduisez le bruit dans votre restaurant et améliorez immédiatement l'expérience client</h1>
+
+					<p class="hero-subtitle">
+						Solutions acoustiques textiles sur mesure, conçues et fabriquées en France.
+					</p>
+
+					<div class="hero-cta">
+						<a href={phoneLink} class="btn btn-primary btn-lg">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+							</svg>
+							{phoneNumber}
+						</a>
+						<a href="#contact-form" class="btn btn-secondary btn-lg">
+							Demander des échantillons
+						</a>
+					</div>
+				</div>
+
+				<div class="hero-cinematic-stats">
+					<div class="hero-stat">
+						<span class="hero-stat-number">500+</span>
+						<span class="hero-stat-label">Projets architecturaux</span>
+					</div>
+					<div class="hero-stat-divider"></div>
+					<div class="hero-stat">
+						<span class="hero-stat-number">45 ans</span>
+						<span class="hero-stat-label">D'expertise acoustique</span>
+					</div>
+					<div class="hero-stat-divider"></div>
+					<div class="hero-stat">
+						<span class="hero-stat-number">100%</span>
+						<span class="hero-stat-label">Fabrication française</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- LOGO BANNER - ILS NOUS FONT CONFIANCE -->
+	<section class="logo-banner">
+		<div class="container">
+			<div class="logo-banner-header">
+				<div class="logo-banner-line"></div>
+				<p class="logo-banner-title">Ils nous font confiance pour leurs projets d'exception</p>
+				<div class="logo-banner-line"></div>
+			</div>
+			<div class="logo-banner-grid">
+				{trustedLogos.map((logo) => (
+					<div class="logo-banner-item">
+						<Image src={logo.logo} alt={logo.name} width={220} height={130} widths={[160, 220]} sizes="(max-width: 768px) 33vw, 160px" format="webp" loading="lazy" />
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- IMPACT SECTION -->
+	<section class="impact-section section">
+		<div class="container">
+			<div class="section-header">
+				<span class="section-label">Pourquoi agir</span>
+				<h2>Trop de bruit nuit à l'expérience.</h2>
+				<p>Nous avons tous déjà vécu un repas gâché par le bruit. Difficulté à discuter, fatigue, manque de confort… Dans un restaurant, le son rebondit sur les surfaces dures (plafond, murs, sol) et crée un brouhaha.</p>
+			</div>
+
+			<div class="impact-grid">
+
+				<div class="impact-card">
+					<div class="impact-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+						</svg>
+					</div>
+					<h3>Perte de concentration</h3>
+					<p>Les environnements réverbérants rendent difficile la concentration. Chaque interruption sonore nécessite un temps de récupération cognitif.</p>
+				</div>
+
+				<div class="impact-card">
+					<div class="impact-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+						</svg>
+					</div>
+					<h3>Intelligibilité réduite</h3>
+					<p>La réverbération excessive brouille la parole. Dans les salles de réunion, restaurants ou classes, les échanges deviennent difficiles.</p>
+				</div>
+
+				<div class="impact-card">
+					<div class="impact-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+						</svg>
+					</div>
+					<h3>Contraintes réglementaires</h3>
+					<p>Les normes acoustiques (code du travail, réglementation ERP, accessibilité) imposent des niveaux de performance à respecter.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- SOLUTION SECTION -->
+	<section class="solution-section section-lg">
+		<div class="container">
+			<div class="solution-header">
+				<div class="solution-header-line"></div>
+				<h2>Les solutions Texaa absorbent les ondes sonores et réduisent la réverbération</h2>
+				<p>Texaa conçoit des solutions où la matière textile est au cœur de la performance acoustique. Pas un simple habillage, mais un système technique complet.</p>
+			</div>
+
+			<div class="solution-products-grid">
+				<a href="#contact-form" class="solution-product-card">
+					<div class="solution-product-image">
+						<Image src={productVibrasto} alt="Vibrasto - Revêtements acoustiques" width={540} height={539} widths={[300, 540]} sizes="(max-width: 768px) 50vw, 280px" format="webp" quality={75} loading="lazy" />
+					</div>
+					<div class="solution-product-content">
+						<span class="solution-product-type">Revêtements acoustiques</span>
+						<h3>Vibrasto</h3>
+						<p>Pour habiller tout type de parois réverbérantes.</p>
+					</div>
+					<div class="solution-product-cta">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
+					</div>
+				</a>
+
+				<a href="#contact-form" class="solution-product-card">
+					<div class="solution-product-image">
+						<Image src={productStereo} alt="Stereo - Panneaux acoustiques" width={540} height={539} widths={[300, 540]} sizes="(max-width: 768px) 50vw, 280px" format="webp" quality={75} loading="lazy" />
+					</div>
+					<div class="solution-product-content">
+						<span class="solution-product-type">Panneaux acoustiques</span>
+						<h3>Stereo</h3>
+						<p>Groupés ou isolés dans le volume, pour s'adapter aux configurations les plus diverses.</p>
+					</div>
+					<div class="solution-product-cta">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
+					</div>
+				</a>
+
+				<a href="#contact-form" class="solution-product-card">
+					<div class="solution-product-image">
+						<Image src={productStereoAir} alt="Stereo Air - Panneaux ajourés" width={540} height={540} widths={[300, 540]} sizes="(max-width: 768px) 50vw, 280px" format="webp" quality={75} loading="lazy" />
+					</div>
+					<div class="solution-product-content">
+						<span class="solution-product-type">Panneaux</span>
+						<h3>Stereo Air</h3>
+						<p>Panneau ajouré pour habiller les fonctions techniques (lumière, ventilation, etc.).</p>
+					</div>
+					<div class="solution-product-cta">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
+					</div>
+				</a>
+
+				<a href="#contact-form" class="solution-product-card">
+					<div class="solution-product-image">
+						<Image src={productStrato} alt="Strato - Plafond flottant" width={540} height={539} widths={[300, 540]} sizes="(max-width: 768px) 50vw, 280px" format="webp" quality={75} loading="lazy" />
+					</div>
+					<div class="solution-product-content">
+						<span class="solution-product-type">Plafond</span>
+						<h3>Strato</h3>
+						<p>Plafond flottant composé de panneaux acoustiques Stereo et de panneaux ajourés Stereo Air.</p>
+					</div>
+					<div class="solution-product-cta">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
+					</div>
+				</a>
+
+				<a href="#contact-form" class="solution-product-card">
+					<div class="solution-product-image">
+						<Image src={productAbso} alt="Abso - Objets acoustiques" width={540} height={539} widths={[300, 540]} sizes="(max-width: 768px) 50vw, 280px" format="webp" quality={75} loading="lazy" />
+					</div>
+					<div class="solution-product-content">
+						<span class="solution-product-type">Objets acoustiques</span>
+						<h3>Abso</h3>
+						<p>Volumes ultra-légers et ultra-absorbants, mobiles ou fixes.</p>
+					</div>
+					<div class="solution-product-cta">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
+					</div>
+				</a>
+			</div>
+
+			<div class="solution-cta">
+				<a href="#contact-form" class="btn btn-outline-red btn-lg">
+					Demander des échantillons textiles
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- WHY TEXAA SECTION -->
+	<section class="why-section section-lg">
+		<div class="container">
+			<div class="why-layout">
+				<div class="why-content">
+					<span class="why-label">Pourquoi Texaa</span>
+					<h2>Depuis plus de 40 ans, Texaa accompagne les restaurants dans l'amélioration de leur confort sonore.</h2>
+
+					<div class="why-features">
+						{whyTexaaFeatures.map((feature) => (
+							<div class="why-feature">
+								<div class="why-feature-number">{feature.number}</div>
+								<div class="why-feature-content">
+									<h3>{feature.title}</h3>
+									<p>{feature.description}</p>
+								</div>
+							</div>
+						))}
+					</div>
+
+					<div class="why-cta-group">
+						<a href={phoneLink} class="btn btn-primary btn-lg">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+							</svg>
+							{phoneNumber}
+						</a>
+						<a href="#contact-form" class="btn btn-outline-dark">
+							Envoyer une demande
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+							</svg>
+						</a>
+					</div>
+				</div>
+
+				<div class="why-image">
+					<Image src={realisationOrange} alt="Réalisation Texaa - Siège régional d'Orange" width={1200} height={800} widths={[600, 1200]} sizes="(max-width: 768px) 100vw, 50vw" format="webp" quality={72} loading="lazy" />
+					<div class="why-image-caption-row">
+						<div class="why-image-caption">
+							<span class="why-image-label">Réalisation</span>
+							<p>Siège régional d'Orange — Traitement acoustique sur mesure.</p>
+						</div>
+						<div class="why-badges">
+							<Image src={logoFabriqueFrance} alt="Fabriqué en France - Garantie résistant" width={557} height={235} widths={[280, 557]} sizes="140px" format="png" quality={100} loading="lazy" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- METHOD SECTION -->
+	<section class="method-section section">
+		<div class="container">
+			<div class="method-header">
+				<span class="method-label">Notre méthode</span>
+				<h2>De l'analyse au résultat mesurable</h2>
+				<p>Chaque projet suit un protocole rigoureux, de la mesure initiale à la validation de l'installation.</p>
+				<p class="method-delivery"><strong>Livraison Rapide :</strong> Production réactive sous quelques semaines pour minimiser l'impact sur votre activité.</p>
+			</div>
+
+			<div class="method-grid">
+				<div class="method-step">
+					<div class="method-step-number">01 <span>— Analyse</span></div>
+					<h3>Diagnostic acoustique</h3>
+					<p>Évaluation des caractéristiques de l'espace : volume, matériaux, usage. Identification des fréquences problématiques et du temps de réverbération actuel.</p>
+				</div>
+				<div class="method-step">
+					<div class="method-step-number">02 <span>— Préconisation</span></div>
+					<h3>Solution sur mesure</h3>
+					<p>Sélection des produits, définition des surfaces d'absorption et proposition d'implantation selon vos contraintes architecturales et budgétaires.</p>
+				</div>
+				<div class="method-step">
+					<div class="method-step-number">03 <span>— Fabrication</span></div>
+					<h3>Production française</h3>
+					<p>Fabrication dans nos ateliers de Bordeaux. Large palette de teintes et textures textiles. Gabaritages et découpes spécifiques sur plan.</p>
+				</div>
+				<div class="method-step">
+					<div class="method-step-number">04 <span>— Installation</span></div>
+					<h3>Installation simple sans interruption de service</h3>
+					<p>Des systèmes de fixation pensés pour être posés rapidement sans gros travaux.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- REFERENCES SECTION -->
+	<section class="references-section section-lg" id="references">
+		<div class="container">
+			<div class="section-header">
+				<span class="section-label">Références</span>
+				<h2>Des projets réalisés dans des environnements exigeants</h2>
+			</div>
+
+			<div class="references-grid">
+				{references.map((ref) => (
+					<div class="reference-card">
+						<div class="reference-card-image">
+							<Image src={ref.image} alt={ref.title} width={1200} height={1200} widths={[600, 1200]} sizes="(max-width: 768px) 100vw, 33vw" format="webp" quality={72} loading="lazy" />
+						</div>
+						<details class="reference-card-content" open>
+							<summary class="reference-card-summary">
+								<h3>{ref.title}</h3>
+								<svg class="reference-card-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+								</svg>
+							</summary>
+							<ul class="reference-details">
+								<li>
+									<span class="reference-label">Projet</span>
+									<span class="reference-value">{ref.project}</span>
+								</li>
+								<li>
+									<span class="reference-label">Livraison</span>
+									<span class="reference-value">{ref.year}</span>
+								</li>
+								<li>
+									<span class="reference-label">Lieu</span>
+									<span class="reference-value">{ref.location}</span>
+								</li>
+								{ref.client && (
+									<li>
+										<span class="reference-label">Maître d'ouvrage</span>
+										<span class="reference-value">{ref.client}</span>
+									</li>
+								)}
+								{ref.architect && (
+									<li>
+										<span class="reference-label">Maîtrise d'œuvre</span>
+										<span class="reference-value">{ref.architect}</span>
+									</li>
+								)}
+								{ref.acoustician && (
+									<li>
+										<span class="reference-label">Acousticien</span>
+										<span class="reference-value">{ref.acoustician}</span>
+									</li>
+								)}
+								{ref.photographer && (
+								<li>
+									<span class="reference-label">Photographe</span>
+									<span class="reference-value">{ref.photographer}</span>
+								</li>
+								)}
+							</ul>
+						</details>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- UN IMPACT IMMÉDIAT -->
+	<section class="impact-immediate-section section" id="impact">
+		<div class="container">
+			<div class="section-header">
+				<span class="section-label">Résultats</span>
+				<h2>Un impact immédiat</h2>
+			</div>
+
+			<div class="impact-immediate-visual">
+				<Image src={avantApres} alt="Avant / Après traitement acoustique Texaa" width={756} height={336} widths={[400, 756]} sizes="(max-width: 768px) 100vw, 720px" format="png" quality={90} loading="lazy" />
+			</div>
+
+			<div class="impact-immediate-grid">
+				<div class="impact-immediate-card">
+					<div class="impact-immediate-number">01</div>
+					<h3>Pour vos clients</h3>
+					<p>Plus de confort, une meilleure expérience, l'envie de revenir.</p>
+				</div>
+				<div class="impact-immediate-card">
+					<div class="impact-immediate-number">02</div>
+					<h3>Pour vos équipes</h3>
+					<p>Moins de fatigue, service plus fluide.</p>
+				</div>
+				<div class="impact-immediate-card">
+					<div class="impact-immediate-number">03</div>
+					<h3>Pour vous</h3>
+					<p>Des avis positifs, une image qualitative, un lieu plus agréable à vivre.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- AVIS CLIENTS -->
+	<section class="testimonials-section section" id="avis">
+		<div class="container">
+			<div class="section-header">
+				<span class="section-label">Témoignages</span>
+				<h2>Ce que nos clients en disent</h2>
+			</div>
+			<div class="testimonials-grid">
+				<div class="testimonial-card">
+					<div class="testimonial-quote">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+							<path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/>
+						</svg>
+					</div>
+					<h3>Une installation rapide, pas besoin de fermer le restaurant</h3>
+					<p>Quitte à investir, autant choisir le meilleur ! En plus de l'efficacité acoustique, la qualité de la relation avec les équipes de Texaa a fait la différence. Le chargé d'affaires a trouvé les bonnes solutions pour respecter toutes nos contraintes. L'utilisation de produits acoustiques suspendus à différentes hauteurs a permis de laisser accessible tous les éléments techniques déjà présents au plafond (aérations, sprinklers, etc) et la pose s'est effectuée en horaires décalés pour que nous puissions continuer à assurer les services.</p>
+					<div class="testimonial-author">
+						<strong>Clément</strong>
+						<span>Propriétaire du Bouillon Marguerite, Villenave d'Ornon</span>
+					</div>
+				</div>
+				<div class="testimonial-card">
+					<div class="testimonial-quote">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+							<path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"/>
+						</svg>
+					</div>
+					<h3>Une atténuation du bruit très efficace et 10 ans après cela fonctionne toujours</h3>
+					<p>Les clients se plaignaient du bruit, et prendre une commande nécessitait toute mon attention : trop de monde dans une petite surface avec des matériaux durs… C'était très fatiguant pour tout le monde. En 2006, j'ai suivi les conseils du chargé d'affaires de Texaa et installé du Vibrasto au plafond. Cela a tout changé ! L'efficacité est incroyable, les clients ont immédiatement remarqué la différence. Et 10 ans après, cela fonctionne toujours…</p>
+					<div class="testimonial-author">
+						<strong>David</strong>
+						<span>Propriétaire du restaurant Le Bistrot 31, 16ème arrondissement de Paris</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- DURABILITÉ & MATIÈRES -->
+	<section class="heritage-section section-lg" id="heritage">
+		<div class="container">
+			<div class="heritage-header">
+				<h2>Des produits de qualité faits pour durer</h2>
+			</div>
+
+			<div class="heritage-main">
+				<div class="heritage-visual">
+					<Image src={heritageAtelier} alt="Atelier Texaa - Savoir-faire artisanal" width={1200} height={1200} widths={[600, 1200]} sizes="(max-width: 768px) 100vw, 50vw" format="webp" quality={72} loading="lazy" />
+					<div class="heritage-visual-badge">
+						<Image src={logoEpv} alt="Label EPV" width={240} height={240} widths={[120, 240]} sizes="120px" format="webp" loading="lazy" />
+					</div>
+				</div>
+
+				<div class="heritage-content">
+					<div class="heritage-epv-text">
+						<h3>Labellisée Entreprise du Patrimoine Vivant (EPV)</h3>
+						<p>Texaa est reconnue par l'État pour son savoir-faire artisanal et industriel d'excellence. En choisissant Texaa, vous soutenez une fabrication française de haute technicité, héritée de 40 ans d'innovation textile près de Bordeaux.</p>
+					</div>
+
+					<div class="heritage-features">
+						<div class="heritage-feature">
+							<div class="heritage-feature-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+								</svg>
+							</div>
+							<div>
+								<h4>Conçu pour durer (vraiment)</h4>
+								<p>Panneaux déhoussables, lavables et réparables.</p>
+							</div>
+						</div>
+						<div class="heritage-feature">
+							<div class="heritage-feature-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+								</svg>
+							</div>
+							<div>
+								<h4>Santé & Sécurité</h4>
+								<p>Classement A+ qualité de l'air, normes incendie M1.</p>
+							</div>
+						</div>
+						<div class="heritage-feature">
+							<div class="heritage-feature-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+								</svg>
+							</div>
+							<div>
+								<h4>Engagement Circulaire</h4>
+								<p>Matières recyclées, pièces disponibles 10 ans minimum.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+	<!-- ACTION SECTION (FORMULAIRE) -->
+	<section class="action-section section-lg" id="contact-form">
+		<div class="container">
+			<div class="action-grid">
+				<div class="action-content">
+					<span class="section-label">Votre projet</span>
+					<h2>Décrivez votre besoin, nos experts vous accompagnent</h2>
+					<p>Obtenez une réponse personnalisée et des recommandations adaptées à votre projet acoustique.</p>
+
+					<ul class="action-benefits">
+						<li>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+							</svg>
+							<span>Analyse de votre problématique par un expert acousticien</span>
+						</li>
+						<li>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+							</svg>
+							<span>Préconisations techniques adaptées à votre espace</span>
+						</li>
+						<li>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+							</svg>
+							<span>Estimation budgétaire sans engagement</span>
+						</li>
+						<li>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+							</svg>
+							<span>Envoi d'échantillons pour validation matière et couleur</span>
+						</li>
+					</ul>
+
+					<div class="action-phone">
+						<p>Vous préférez échanger directement ?</p>
+						<a href={phoneLink}>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+							</svg>
+							{phoneNumber}
+						</a>
+					</div>
+				</div>
+
+				<div class="action-form-wrapper">
+					<h3>Demande de contact / rappel expert</h3>
+					<p class="form-subtitle">Recevez notre catalogue d'échantillons ou demandez un rappel pour discuter de votre projet avec un expert.</p>
+
+					<form id="leadForm">
+						<input type="hidden" id="gclid" name="gclid" value="">
+						<div class="form-grid">
+							<div class="form-group">
+								<label for="lastname">Nom <span class="form-required" aria-hidden="true">*</span></label>
+								<input type="text" id="lastname" name="lastname" placeholder="Votre nom" required autocomplete="family-name">
+							</div>
+
+							<div class="form-group">
+								<label for="firstname">Prénom <span class="form-required" aria-hidden="true">*</span></label>
+								<input type="text" id="firstname" name="firstname" placeholder="Votre prénom" required autocomplete="given-name">
+							</div>
+
+							<div class="form-group full-width">
+								<label for="establishment_type">Type d'établissement <span class="form-required" aria-hidden="true">*</span></label>
+								<div class="form-select-wrapper">
+									<select id="establishment_type" name="establishment_type" required>
+										<option value="" disabled selected>Sélectionnez votre secteur</option>
+										<option value="espaces-travail">Espaces de travail</option>
+										<option value="enseignement">Enseignement</option>
+										<option value="restaurant">Restaurant</option>
+										<option value="hotel">Hôtel</option>
+										<option value="hopitaux">Hôpitaux</option>
+										<option value="autres">Autres</option>
+									</select>
+									<svg class="form-select-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+									</svg>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="city">Ville <span class="form-required" aria-hidden="true">*</span></label>
+								<input type="text" id="city" name="city" placeholder="Votre ville" required autocomplete="address-level2">
+							</div>
+
+							<div class="form-group">
+								<label for="phone">Téléphone <span class="form-required" aria-hidden="true">*</span></label>
+								<input type="tel" id="phone" name="phone" placeholder="06 XX XX XX XX" required autocomplete="tel">
+							</div>
+
+							<div class="form-group full-width">
+								<label for="email">Email professionnel <span class="form-required" aria-hidden="true">*</span></label>
+								<input type="email" id="email" name="email" placeholder="vous@entreprise.fr" required autocomplete="email">
+							</div>
+
+							<div class="form-group full-width">
+								<label for="comments">Commentaires</label>
+								<textarea id="comments" name="comments" rows="4" placeholder="Décrivez votre projet ou vos questions..."></textarea>
+							</div>
+						</div>
+
+						<!-- Documents souhaités -->
+						<div class="form-documents">
+							<label class="form-documents-label">Documents souhaités <span>(optionnel)</span></label>
+							<div class="form-documents-grid">
+								<label class="document-checkbox">
+									<input type="checkbox" name="documents" value="nuancier">
+									<div class="document-checkbox-content">
+										<div class="document-icon document-icon-nuancier">
+											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+												<path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+											</svg>
+										</div>
+										<div class="document-info">
+											<strong>Nuancier</strong>
+											<span>Version papier — teintes & textures</span>
+										</div>
+									</div>
+								</label>
+
+								<label class="document-checkbox">
+									<input type="checkbox" name="documents" value="brochure">
+									<div class="document-checkbox-content">
+										<div class="document-icon document-icon-brochure">
+											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+												<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+											</svg>
+										</div>
+										<div class="document-info">
+											<strong>Brochure</strong>
+											<span>Documentation technique produits</span>
+										</div>
+									</div>
+								</label>
+
+								<label class="document-checkbox">
+									<input type="checkbox" name="documents" value="coffret">
+									<div class="document-checkbox-content">
+										<div class="document-icon document-icon-coffret">
+											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+												<path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+											</svg>
+										</div>
+										<div class="document-info">
+											<strong>Coffret prescripteur</strong>
+											<span>Brochure + nuancier textile + mailles</span>
+										</div>
+									</div>
+								</label>
+							</div>
+						</div>
+
+						<div class="form-error" id="formError" role="alert" aria-live="polite">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+							</svg>
+							<div>
+								<strong>Envoi impossible pour l'instant.</strong>
+								<span>Réessayez dans un instant, ou appelez-nous directement au <a href={phoneLink}>{phoneNumber}</a>.</span>
+							</div>
+						</div>
+
+						<div class="form-submit">
+							<button type="submit" class="btn btn-primary btn-lg btn-full">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+								</svg>
+								Envoyer ma demande — Réponse sous 24h
+							</button>
+						</div>
+
+						<p class="form-note">Vos données sont traitées uniquement dans le cadre de votre demande. Consultez notre <a href="https://texaa.fr/politique-de-confidentialite/" target="_blank" rel="noopener">politique de confidentialité</a>.</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- FAQ SECTION -->
+	<section class="faq-section section" id="faq">
+		<div class="container">
+			<div class="section-header">
+				<span class="section-label">Questions fréquentes</span>
+				<h2>Vos questions sur l'acoustique</h2>
+			</div>
+
+			<div class="faq-list">
+				{faqs.map((faq) => (
+					<div class="faq-item">
+						<button class="faq-question" type="button">
+							{faq.question}
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+							</svg>
+						</button>
+						<div class="faq-answer">
+							<div class="faq-answer-inner">
+								{faq.answer}
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<Footer />
+</Layout>
+
+<script>
+	// Sticky Header
+	const stickyHeader = document.getElementById('stickyHeader');
+	const heroSection = document.querySelector('.hero');
+
+	// Show header immediately
+	if (stickyHeader) {
+		stickyHeader.classList.add('visible');
+	}
+
+	// FAQ Accordion
+	const faqItems = document.querySelectorAll('.faq-item');
+
+	faqItems.forEach(item => {
+		const question = item.querySelector('.faq-question');
+
+		question?.addEventListener('click', () => {
+			const isOpen = item.classList.contains('open');
+
+			// Close all items
+			faqItems.forEach(i => i.classList.remove('open'));
+
+			// Open clicked item if it wasn't open
+			if (!isOpen) {
+				item.classList.add('open');
+			}
+		});
+	});
+
+	// Smooth scroll for anchor links
+	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+		anchor.addEventListener('click', function(e) {
+			const href = this.getAttribute('href');
+			if (href && href !== '#') {
+				e.preventDefault();
+				const target = document.querySelector(href);
+				if (target) {
+					target.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+				}
+			}
+		});
+	});
+
+	// Lead form — config
+	const WEBHOOK_URL = 'https://hook.eu1.make.com/ccd1wp8b3g1b6d3df7b7mm8cvjgpx2sh';
+	const RECAPTCHA_SITE_KEY = '6LfdGbcsAAAAABOVbZdqS0NTIqEw-Y1GGUq-YNtf';
+	const leadForm = document.getElementById('leadForm') as HTMLFormElement | null;
+
+	// Capture du gclid depuis l'URL (?gclid=XXX) et stockage dans le champ caché
+	const gclidField = document.getElementById('gclid') as HTMLInputElement | null;
+	const urlParams = new URLSearchParams(window.location.search);
+	const gclid = urlParams.get('gclid') || '';
+	if (gclidField && gclid) {
+		gclidField.value = gclid;
+	}
+
+	// Validation helpers
+	function trim(val: FormDataEntryValue | null): string {
+		return (val as string || '').trim();
+	}
+
+	function isValidEmail(email: string): boolean {
+		return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+	}
+
+	function isValidPhone(phone: string): boolean {
+		const digits = phone.replace(/[\s.\-()+ ]/g, '');
+		return digits.length >= 10;
+	}
+
+	function showFieldError(field: HTMLElement | null, msg: string) {
+		if (!field) return;
+		field.classList.add('has-error');
+		let errEl = field.querySelector('.field-error') as HTMLElement | null;
+		if (!errEl) {
+			errEl = document.createElement('span');
+			errEl.className = 'field-error';
+			errEl.setAttribute('role', 'alert');
+			field.appendChild(errEl);
+		}
+		errEl.textContent = msg;
+	}
+
+	function clearFieldErrors() {
+		leadForm?.querySelectorAll('.has-error').forEach(el => el.classList.remove('has-error'));
+		leadForm?.querySelectorAll('.field-error').forEach(el => el.remove());
+	}
+
+	if (leadForm) {
+		const submitBtn = leadForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+		const errorBox = document.getElementById('formError');
+
+		leadForm.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			if (!submitBtn) return;
+
+			// Reset erreurs
+			clearFieldErrors();
+			errorBox?.classList.remove('is-visible');
+
+			// Collecte + nettoyage
+			const formData = new FormData(leadForm);
+			const lastname = trim(formData.get('lastname'));
+			const firstname = trim(formData.get('firstname'));
+			const establishment_type = trim(formData.get('establishment_type'));
+			const city = trim(formData.get('city'));
+			const phone = trim(formData.get('phone'));
+			const email = trim(formData.get('email'));
+			const comments = trim(formData.get('comments'));
+			const documents = formData.getAll('documents') as string[];
+
+			// Validation
+			let hasError = false;
+
+			if (lastname.length < 2) {
+				showFieldError(document.getElementById('lastname')?.closest('.form-group') || null, 'Veuillez renseigner votre nom');
+				hasError = true;
+			}
+			if (firstname.length < 2) {
+				showFieldError(document.getElementById('firstname')?.closest('.form-group') || null, 'Veuillez renseigner votre prénom');
+				hasError = true;
+			}
+			if (!establishment_type) {
+				showFieldError(document.getElementById('establishment_type')?.closest('.form-group') || null, 'Veuillez sélectionner un type d\'établissement');
+				hasError = true;
+			}
+			if (city.length < 2) {
+				showFieldError(document.getElementById('city')?.closest('.form-group') || null, 'Veuillez renseigner votre ville');
+				hasError = true;
+			}
+			if (!isValidPhone(phone)) {
+				showFieldError(document.getElementById('phone')?.closest('.form-group') || null, 'Numéro de téléphone invalide (10 chiffres minimum)');
+				hasError = true;
+			}
+			if (!isValidEmail(email)) {
+				showFieldError(document.getElementById('email')?.closest('.form-group') || null, 'Adresse email invalide');
+				hasError = true;
+			}
+
+			if (hasError) return;
+
+			// UI : état chargement
+			submitBtn.classList.add('is-loading');
+			submitBtn.disabled = true;
+
+			try {
+				// reCAPTCHA v3 — récupération du token
+				let recaptchaToken = '';
+				try {
+					recaptchaToken = await (window as any).grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_lead' });
+				} catch {
+					// Si reCAPTCHA échoue (bloqué, timeout), on envoie quand même sans token
+					// Make décidera de traiter ou non
+				}
+
+				const payload = {
+					lastname,
+					firstname,
+					establishment_type,
+					city,
+					phone,
+					email,
+					comments,
+					documents,
+					gclid: gclidField?.value || '',
+					recaptcha_token: recaptchaToken,
+					submitted_at: new Date().toISOString(),
+					source: 'solutions.texaa.fr',
+				};
+
+				const response = await fetch(WEBHOOK_URL, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(payload),
+				});
+
+				if (!response.ok) {
+					throw new Error(`HTTP ${response.status}`);
+				}
+
+				// Succès : redirection vers la page de remerciement
+				window.location.href = '/merci';
+			} catch {
+				// Échec : on restaure le bouton et affiche le message d'erreur
+				submitBtn.classList.remove('is-loading');
+				submitBtn.disabled = false;
+				errorBox?.classList.add('is-visible');
+			}
+		});
+	}
+
+	// References : <details> ouvert sur desktop, repliable sur mobile
+	const referencesDetails = document.querySelectorAll('.reference-card-content');
+	const desktopMq = window.matchMedia('(min-width: 1025px)');
+
+	function syncReferenceDetails(matches: boolean) {
+		referencesDetails.forEach(d => {
+			if (matches) {
+				d.setAttribute('open', '');
+			} else {
+				d.removeAttribute('open');
+			}
+		});
+	}
+
+	syncReferenceDetails(desktopMq.matches);
+	desktopMq.addEventListener('change', e => syncReferenceDetails(e.matches));
+</script>
