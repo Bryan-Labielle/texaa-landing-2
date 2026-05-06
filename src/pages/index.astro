@@ -1028,15 +1028,15 @@ const faqs = [
 					source: 'solutions.texaa.fr',
 				};
 
-				const response = await fetch(WEBHOOK_URL, {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(payload),
-				});
+				// const response = await fetch(WEBHOOK_URL, {
+				// 	method: 'POST',
+				// 	headers: { 'Content-Type': 'application/json' },
+				// 	body: JSON.stringify(payload),
+				// });
 
-				if (!response.ok) {
-					throw new Error(`HTTP ${response.status}`);
-				}
+				// if (!response.ok) {
+				// 	throw new Error(`HTTP ${response.status}`);
+				// }
 
 				// Succès : redirection vers la page de remerciement
 				window.location.href = '/merci';
